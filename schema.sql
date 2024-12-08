@@ -1,4 +1,4 @@
-#sql script for creating database:schema.sql
+/*sql script for creating database:schema.sql*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -19,7 +19,8 @@ CREATE TABLE Users (
     role VARCHAR(50) NOT NULL default '',
     created_at DATETIME DEFAULT NOW(),
     PRIMARY KEY (id)
-);
+)ENGINE = MYISAM AUTOINCREMENT = 1 DEFAULT CHARSET = utf8mb4;
+
 
 -- Users Insert Data
 LOCK TABLES users WRITE;
@@ -50,7 +51,7 @@ CREATE TABLE Contacts (
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (assigned_to) REFERENCES Users(id),
     FOREIGN KEY (created_by) REFERENCES Users(id)
-);
+)ENGINE = MYISAM AUTOINCREMENT = 1 DEFAULT CHARSET = utf8mb4;
 
 -- Contacts Insert Data
 LOCK TABLES contacts WRITE;
@@ -69,7 +70,7 @@ CREATE TABLE Notes (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (contact_id) REFERENCES Contacts(id),
     FOREIGN KEY (created_by) REFERENCES Users(id)
-);
+)ENGINE = MYISAM AUTOINCREMENT = 1 DEFAULT CHARSET = utf8mb4;
 
 --Notes Insert Data
 LOCK TABLES notes WRITE;
@@ -78,6 +79,20 @@ INSERT INTO notes(contact_id, created_by, comment) VALUES
     ('2', 4, 'Customer Not Added');
 UNLOCK TABLES;
 
+/*
+ADDITIONAL STATEMENTS
+
+Create a new user
+CREATE USER 'adminCRM'@'localhost' IDENTIFIED BY 'password123';
+
+User Privileges
+GRANT ALL PRIVILEGES ON dolphin_crm. * TO 'adminCRM'@'localhost';
+FLUSH PRIVILEGES;
+
+*/
+
+
+-- WAS HERE BEFORE AND I DONT WANT TO DELETE IT
 /*password hashing using SHA2*/
 -- Insert admin user
 /*INSERT INTO Users (firstname, lastname, password, email, role)

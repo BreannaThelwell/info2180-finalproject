@@ -79,7 +79,6 @@ $result = $conn->query($query);
             <a href="dashboard.php?filter=support" class="<?= $filter === 'support' ? 'active' : '' ?>">Support</a>
             <a href="dashboard.php?filter=assigned_to_me" class="<?= $filter === 'assigned_to_me' ? 'active' : '' ?>">Assigned to Me</a>
         </div>
-         <!-- Contact list table -->
         <table class="table">
             <thead>
                 <tr>
@@ -91,19 +90,16 @@ $result = $conn->query($query);
                 </tr>
             </thead>
             <tbody>
-                 <!-- Loop through the contacts and display them -->
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <tr>
                         <td><?= $row['title'] . ' ' . $row['firstname'] . ' ' . $row['lastname'] ?></td>
                         <td><?= $row['email'] ?></td>
                         <td><?= $row['company'] ?></td>
                         <td>
-                             <!-- Display badge based on the contact type -->
                             <span class="badge <?= strtolower(str_replace(' ', '-', $row['type'])) ?>">
                                 <?= strtoupper($row['type']) ?>
                             </span>
                         </td>
-                         <!-- Link to view the contact details -->
                         <td><a href="view_contact.php?id=<?= $row['id'] ?>">View</a></td>
                     </tr>
                 <?php endwhile; ?>

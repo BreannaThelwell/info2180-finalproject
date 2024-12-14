@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = ""; // Your MySQL password
+$password = ""; // 
 $dbname = "dolphin_crm";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
